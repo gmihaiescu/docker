@@ -1,7 +1,0 @@
----
-- hosts: demo
-  sudo: True
-  roles:
-    - role: postgres
-      tags:
-        - postgres
