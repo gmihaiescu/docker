@@ -16,16 +16,14 @@ This version of SeqWare uses the WhiteStar workflow engine to quickly run workfl
 
 ### SeqWare WhiteStar with Pancancer
 
-Directory: seqware\_whitestar\_with\_pancancer
-
+Directory: seqware\_whitestar\_with\_pancancer  
 Pre-requisite: SeqWare WhiteStar
 
 This layers in system level dependencies for the BWA and Sanger workflows for the pan-cancer project. 
 
 ### Documentation Builder 
 
-Directory: documentation\_builder
-
+Directory: documentation\_builder  
 Pre-requisite: SeqWare WhiteStar
 
 Used internally for the SeqWare project to build documentation via jenkins when changes are pushed to GitHub. 
@@ -38,8 +36,7 @@ This version of SeqWare uses the Oozie-SGE workflow engine to run workflows. Thi
 
 ### SeqWare Oozie-SGE with Pancancer
 
-Directory: seqware\_full\_pancancer\_launcher
-
+Directory: seqware\_full\_pancancer\_launcher  
 Pre-requisite: SeqWare Full
 
 This layers in system level dependencies for the BWA and Sanger workflows for the pan-cancer project. 
