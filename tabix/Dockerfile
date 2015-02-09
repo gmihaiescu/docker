@@ -2,9 +2,7 @@
 #
 # VERSION               1
 #
-# Setup SeqWare with WhiteStar (no sge, no oozie, no metadata)
-# Volume mount \datastore to persist the contents of your workflows
-# ex:  sudo docker run -d -P --name web -v datastore/data:/data \bin\bash 
+# Setup nginix serving data for the pan-cancer Sanger workflow 
 
 FROM ubuntu:12.04
 MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
@@ -21,17 +19,14 @@ RUN git checkout v1.6.10 ;\
     adduser seqware sudo ;\
     sed -i.bkp -e \
       's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
-      /etc/sudoers ;\
-    mkdir /datastore && chown seqware /datastore
+      /etc/sudoers ;
 ENV PATH /tmp/ansible/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV ANSIBLE_LIBRARY /tmp/ansible/library
 ENV PYTHONPATH /tmp/ansible/lib:$PYTHON_PATH
 WORKDIR /home/ubuntu
 # setup tabix 
-RUN git clone -b feature/pancancer-217 https://github.com/SeqWare/seqware-sandbox.git 
-WORKDIR /home/ubuntu/seqware-sandbox/ansible_tabix
-ADD local.inventory /home/ubuntu/seqware-sandbox/ansible_tabix/local.inventory
-RUN ansible-playbook -i local.inventory site_noebs.yml -c local
+ADD ansible /home/ubuntu/ansible
+RUN ansible-playbook -i /home/ubuntu/ansible/inventory /home/ubuntu/ansible/site_noebs.yml -c local
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 CMD ["/usr/sbin/nginx"]
