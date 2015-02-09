@@ -1,4 +1,4 @@
-This is the base Dockerfile for seqware inside docker. 
+This is the base Dockerfile for seqware whitestar. 
 
 ## Prerequisites
 
@@ -13,14 +13,14 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 
 1. Assuming docker is installed properly, build image with 
 
-        sudo docker build  -t seqware_1.1.0-alpha.6 .
+        docker build  -t seqware_1.1.0-alpha.6 .
 
 ### Downloading and restoring the image
 
 1. Rather than building the image, you can also download and restore it from S3 
 
         aws s3 cp s3://oicr.docker.images/seqware_1.1.0-alpha.6.tar .
-        sudo docker load -i seqware_1.1.0-alpha.6.tar
+        docker load -i seqware_1.1.0-alpha.6.tar
 
 ## Running the Container
 
@@ -30,7 +30,7 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 
 2. Run container and login with the following (while persisting workflow run directories to datastore)
  
-        sudo docker run --rm -h master -t -v `pwd`/datastore:/datastore  -i seqware_1.1.0-alpha.6
+        docker run --rm -h master -t -v `pwd`/datastore:/datastore  -i seqware_1.1.0-alpha.6
 
 3. Run the HelloWorld (sample) workflow with 
 
@@ -41,7 +41,7 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 1. Exit the container and save the image
 
         exit
-        sudo docker save -o seqware_1.1.0-alpha.6.tar seqware_1.1.0-alpha.6
+        docker save -o seqware_1.1.0-alpha.6.tar seqware_1.1.0-alpha.6
 
 2. Upload the image to S3 (given proper credentials)
 
