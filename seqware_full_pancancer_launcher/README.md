@@ -3,6 +3,14 @@ This layers all pancancer dependencies (aside from the workflows themselves, whi
 ## Prerequisites
 
 Install the AWS CLI. Refer to the following guides and remember to setup your AWS credentials.
+
+In other words, create a file at ~/.aws/config with the following filled in.
+
+        [default]
+        aws_access_key_id =
+        aws_secret_access_key =
+
+Further details can be found at the following:
  
 * https://aws.amazon.com/cli/ 
 * http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html 
@@ -57,13 +65,9 @@ If you are building the container, you will require the seqware\_inside docker i
          # the server that has various tabix-indexed files on it, see above, update with your URL
          tabixSrvUri=http://172.17.0.13/   
 
-6. Run workflow sequentially with 
+6. Run workflow with oozie-sge with 
 
-         seqware bundle launch --dir /workflow --no-metadata --ini workflow.ini
-
-   Alternatively, run it in parallel with the following command. 
- 
-         seqware bundle launch --dir /workflow --no-metadata --ini workflow.ini --engine whitestar-parallel
+         seqware bundle launch --dir /workflow --ini workflow.ini
 
 7. For running real workflows, you will be provided with a gnos pem key that should be installed to the scripts directory of the Sanger workflow.
 
