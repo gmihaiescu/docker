@@ -1,6 +1,4 @@
 # Setup SeqWare with the Sanger workflow
-# Volume mount \datastore to persist the contents of your workflows
-# ex:  sudo docker run -d -P --name web -v datastore:/datastore \bin\bash 
 
 FROM seqware_1.1.0-alpha.6_full
 MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>

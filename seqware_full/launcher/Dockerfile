@@ -18,6 +18,7 @@ ENV PATH /home/seqware/bin:/tmp/ansible/bin:/usr/local/sbin:/usr/local/bin:/usr/
 ENV HOME /home/seqware
 USER seqware
 WORKDIR /home/seqware
-RUN git clone -b feature/oozie-sge_inside_docker  https://github.com/SeqWare/seqware-bag.git
+RUN git clone https://github.com/SeqWare/seqware-bag.git
+RUN cd seqware-bag && git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
 ADD ./scripts/start.sh /start.sh
 CMD ["/bin/bash", "/start.sh"]

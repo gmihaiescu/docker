@@ -13,24 +13,25 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 
 1. Assuming docker is installed properly, build image with 
 
-        sudo docker build  -t seqware_1.1.0-alpha.6_base .
+        docker build  -t seqware_1.1.0-alpha.6_base .
 
 2. Unfortunately, the ansible script needs to be run on an active container with a proper hostname. (This is very far from optimal but is a workaround since the apt package for SGE seems to require a valid hostname)
 
-        sudo docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_base
-        ansible-playbook docker-seqware-install.yml -c local --extra-vars "seqware_version=1.1.0-alpha.6"
+        docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_base
+        ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.0-alpha.6 docker=yes"
      
 3. Save the docker container from the outside (from outside the container)
 
-        sudo docker ps (figure out the container id)
-        sudo docker commit <container id> seqware_1.1.0-alpha.6_activated_base
-        sudo docker save -o seqware_1.1.0-alpha.6_activated_base
+        docker ps (figure out the container id)
+        docker commit <container id> seqware_1.1.0-alpha.6_activated_base
+        docker save -o seqware_1.1.0-alpha.6_activated_base
 
 4. Use a second Dockerfile to prime the container as a valid image (and save it for export).           
 
         cd launcher
-        sudo docker build  -t seqware_1.1.0-alpha.6_full .
-        sudo docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_full
+        chmod a+w datastore
+        docker build  -t seqware_1.1.0-alpha.6_full .
+        docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_full
         
 
 ### Downloading and restoring the image
@@ -38,7 +39,7 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 1. Rather than building the image, you can also download and restore it from S3 
 
         aws s3 cp s3://oicr.docker.images/seqware_1.1.0-alpha.6_full.tar .
-        sudo docker load -i seqware_1.1.0-alpha.6_full.tar
+        docker load -i seqware_1.1.0-alpha.6_full.tar
 
 ## Running the Container
 
@@ -49,7 +50,7 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 
 2. Run container and login with the following (while persisting workflow run directories to datastore)
  
-        sudo docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_full
+        docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore  -i seqware_1.1.0-alpha.6_full
 
 3. Run the HelloWorld (sample) workflow with 
 
@@ -60,7 +61,7 @@ Install the AWS CLI. Refer to the following guides and remember to setup your AW
 1. Exit the container and save the image
 
         exit
-        sudo docker save -o seqware_1.1.0-alpha.6_full.tar seqware_1.1.0-alpha.6_full
+        docker save -o seqware_1.1.0-alpha.6_full.tar seqware_1.1.0-alpha.6_full
 
 2. Upload the image to S3 (given proper credentials)
 
