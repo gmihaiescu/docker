@@ -22,6 +22,8 @@ Further details can be found at the following:
 
 Install Docker based on the instructions at https://docs.docker.com/installation/ubuntulinux/ Following the instructions for your Ubuntu version, we recommend 14.04. Please also follow the section on giving non-root access to your preferred user. 
 
+After setting up, exit your shell and log back in to refresh your Shell.
+
 ## Tabix 
 
 Directory: tabix
