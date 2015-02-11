@@ -1,31 +1,14 @@
 This layers all pancancer dependencies (aside from the workflows themselves, which are fairly big)  on top of a base SeqWare docker image
 
-## Prerequisites
-
-Install the AWS CLI. Refer to the following guides and remember to setup your AWS credentials.
-
-In other words, create a file at ~/.aws/config with the following filled in.
-
-        [default]
-        aws_access_key_id =
-        aws_secret_access_key =
-
-Further details can be found at the following:
- 
-* https://aws.amazon.com/cli/ 
-* http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html 
-
-        sudo apt-get install python-pip
-        pip install awscli
-
-
-You will also require the tabix container in order to run the Sanger workflow. 
-
-If you are building the container, you will require the seqware\_inside docker image on your system. 
-
 ## Getting the image
 
+There are two ways of getting the image:
+* as a developer, you can build the image using the docker file
+* as a user, download the image from S3
+
 ### Building the image
+
+If you are building the container, you will require the seqware\_inside docker image on your system. 
 
 1. Assuming docker is installed properly, build image with 
  
@@ -40,36 +23,46 @@ If you are building the container, you will require the seqware\_inside docker i
 
 ## Running the Container
 
+You will also require the tabix container in order to run the Sanger workflow. 
 
-1. Set permissions on datastore which will hold results of workflows after they run
+1. Create a working directory 
+
+        mkdir ~/docker_working_dir
+        cd ~/docker_working_dir 
+        mkdir datastore
+        mkdir workflows
+
+2. Set permissions on datastore which will hold results of workflows after they run
 
          chmod a+w datastore
 
-2. Run the tabix server as a named container if you have not already (see tabix\_inside\_docker) 
+3. Run the tabix server as a named container if you have not already (see [tabix](../tabix)) 
 
-3. Download and expand your workflows using the SeqWare unzip tool. Here we use Sanger as an example (you should probably pick a shared directory outside of this directory to avoid interfering with the Docker context if you need to rebuild the image). 
+4. Download and expand your workflows using the SeqWare unzip tool. Here we use Sanger as an example (you should probably pick a shared directory outside of this directory to avoid interfering with the Docker context if you need to rebuild the image). 
 
          cd workflows
          wget https://seqwaremaven.oicr.on.ca/artifactory/seqware-release/com/github/seqware/seqware-distribution/1.1.0-alpha.6/seqware-distribution-1.1.0-alpha.6-full.jar
          wget https://s3.amazonaws.com/oicr.workflow.bundles/released-bundles/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.1_SeqWare_1.1.0-alpha.5.zip
          java -cp seqware-distribution-1.1.0-alpha.6-full.jar net.sourceforge.seqware.pipeline.tools.UnZip --input-zip Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.1_SeqWare_1.1.0-alpha.5.zip --output-dir  Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.1_SeqWare_1.1.0-alpha.5
 
-4. Run container and login with the following (while persisting workflow run directories to datastore, and opening a secure link to the tabix server). Here we assume that a tabix container has already started, that you want to store your workflow results at /datastore and that the workflow that you wish to run (Sanger) is present in the workflows directory. Change these locations as required for your environment.  
+5. Run container and login with the following (while persisting workflow run directories to datastore, and opening a secure link to the tabix server). Here we assume that a tabix container has already started, that you want to store your workflow results at /datastore and that the workflow that you wish to run (Sanger) is present in the workflows directory. Change these locations as required for your environment.  
 
          docker run --rm -h master -t --link pancancer_tabix_server:pancancer_tabix_server -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.1_SeqWare_1.1.0-alpha.5:/workflow  -i seqware_1.1.0-alpha.6_full_pancancer
+        
+After this command you will be inside the running container.
 
-5. Create an ini file (the contents of this will depend on your workflow). For testing purposes, you will require the following ini, note that the ip address for the tabix server will appear in your environment variables as PANCANCER\_TABIX\_SERVER\_PORT\_80\_TCP\_ADDR 
+6. Create an ini file (the contents of this will depend on your workflow). For testing purposes, you will require the following ini, note that the ip address for the tabix server will be injected into your environment variables as PANCANCER\_TABIX\_SERVER\_PORT\_80\_TCP\_ADDR based on the `--link parameter` above. Alternatively, you can use a tabix server running on a different host using its IP address.
 
          # not "true" means the data will be downloaded using AliquotIDs
          testMode=true
          # the server that has various tabix-indexed files on it, see above, update with your URL
          tabixSrvUri=http://172.17.0.13/   
 
-6. Run workflow with oozie-sge with 
+7. Run workflow with oozie-sge with 
 
          seqware bundle launch --dir /workflow --ini workflow.ini
 
-7. For running real workflows, you will be provided with a gnos pem key that should be installed to the scripts directory of the Sanger workflow.
+8. For running real workflows, you will be provided with a gnos pem key that should be installed to the scripts directory of the Sanger workflow.
 
 ## Saving the image
 
