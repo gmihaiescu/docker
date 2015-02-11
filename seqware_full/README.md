@@ -1,13 +1,8 @@
-This is the base Dockerfile for full seqware inside docker. 
-
-## Prerequisites
-
-Install the AWS CLI. Refer to the following guides and remember to setup your AWS credentials. 
-
-* https://aws.amazon.com/cli/ 
-* http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html 
-
 ## Getting the image
+
+There are two ways of getting the image:
+* as a developer, you can build the image using the docker file
+* as a user, download the image from S3
 
 ### Building the image
 
