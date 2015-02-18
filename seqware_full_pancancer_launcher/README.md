@@ -4,7 +4,7 @@ This layers all pancancer dependencies (aside from the workflows themselves, whi
 
 There are two ways of getting the image:
 * as a developer, you can build the image using the docker file
-* as a user, download the image from S3
+* as a user, download the image from Docker Hub
 
 ### Building the image
 
@@ -12,16 +12,13 @@ If you are building the container, you will require the seqware\_inside docker i
 
 1. Assuming docker is installed properly, build image with 
  
-        docker build  -t seqware_1.1.0-alpha.6_full_pancancer .
+        docker build  -t seqware/seqware_full_pancancer .
 
 ### Downloading and restoring the image
 
-The current `<version>` of this image is 2.
+1. Rather than building the image, you can also download and restore it from Docker Hub
 
-1. Rather than building the image, you can also download and restore it from S3 
-
-        aws s3 cp s3://oicr.docker.images/seqware_1.1.0-alpha.6_full_pancancer<version>.tar .
-        docker load -i seqware_1.1.0-alpha.6_full_pancancer<version>.tar
+        docker pull seqware/seqware_full_pancancer
 
 ## Running the Container
 
@@ -67,11 +64,7 @@ You will also require the tabix container in order to run the Sanger workflow.
 
 ## Saving the image
 
-1. Save the image
+1. Exit the container and push the image to Docker Hub 
 
-        exit
-        docker save -o seqware_1.1.0-alpha.6_full_pancancer<version>.tar seqware_1.1.0-alpha.6_full_pancancer
-
-2. Upload the image to S3 (given proper credentials)
-
-        aws s3 cp seqware_1.1.0-alpha.6_full_pancancer<version>.tar s3://oicr.docker.images
+         exit
+         docker push seqware/seqware_full_pancancer
