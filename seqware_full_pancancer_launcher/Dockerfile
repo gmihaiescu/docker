@@ -1,6 +1,6 @@
 # Setup SeqWare with the Sanger workflow
 
-FROM seqware_1.1.0-alpha.6_full
+FROM seqware/seqware_full 
 MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
 
 # at this point, assume seqware has been fully setup

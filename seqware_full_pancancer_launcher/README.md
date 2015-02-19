@@ -1,28 +1,4 @@
-This layers all pancancer dependencies (aside from the workflows themselves, which are fairly big)  on top of a base SeqWare docker image
-
-## Getting the image
-
-There are two ways of getting the image:
-* as a developer, you can build the image using the docker file
-* as a user, download the image from Docker Hub
-
-### Building the image
-
-If you are building the container, you will require the seqware\_inside docker image on your system. 
-
-1. Assuming docker is installed properly, build image with 
- 
-        docker build  -t seqware/seqware_full_pancancer .
-
-### Downloading and restoring the image
-
-1. Rather than building the image, you can also download and restore it from Docker Hub
-
-        docker pull seqware/seqware_full_pancancer
-
-## Running the Container
-
-You will also require the tabix container in order to run the Sanger workflow. 
+## Users - Running the Container
 
 1. Create a working directory 
 
@@ -47,7 +23,7 @@ You will also require the tabix container in order to run the Sanger workflow.
 5. Run container and login with the following (while persisting workflow run directories to datastore, and opening a secure link to the tabix server). Here we assume that a tabix container has already started, that you want to store your workflow results at /datastore and that the workflow that you wish to run (Sanger) is present in the workflows directory. Change these locations as required for your environment.  After this command you will be inside the running container.
 
 
-         docker run --rm -h master -t --link pancancer_tabix_server:pancancer_tabix_server -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.5_SeqWare_1.1.0-alpha.5:/workflow  -i seqware_1.1.0-alpha.6_full_pancancer
+         docker run --rm -h master -t --link pancancer_tabix_server:pancancer_tabix_server -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.5_SeqWare_1.1.0-alpha.5:/workflow  -i seqware/seqware_full_pancancer
 
 6. Create an ini file (the contents of this will depend on your workflow). For testing purposes, you will require the following ini, note that the ip address for the tabix server will be injected into your environment variables as PANCANCER\_TABIX\_SERVER\_PORT\_80\_TCP\_ADDR based on the `--link parameter` above. Alternatively, you can use a tabix server running on a different host using its IP address.
 
@@ -62,9 +38,8 @@ You will also require the tabix container in order to run the Sanger workflow.
 
 8. For running real workflows, you will be provided with a gnos pem key that should be installed to the scripts directory of the Sanger workflow.
 
-## Saving the image
+## Developers - building the image locally 
 
-1. Exit the container and push the image to Docker Hub 
+1. Assuming docker is installed properly, build image with
 
-         exit
-         docker push seqware/seqware_full_pancancer
+        docker build  -t seqware/pancancer_tabix_server .
