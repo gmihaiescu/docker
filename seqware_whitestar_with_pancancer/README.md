@@ -1,44 +1,11 @@
-This layers all pancancer dependencies (aside from the workflows themselves, which are fairly big)  on top of a base SeqWare docker image
-
-## Prerequisites
-
-Install the AWS CLI. Refer to the following guides and remember to setup your AWS credentials.
- 
-* https://aws.amazon.com/cli/ 
-* http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html 
-
-        sudo apt-get install python-pip
-        pip install awscli
-
-You will also require the tabix container in order to run the Sanger workflow. 
-
-If you are building the container, you will require the seqware\_whitestar image on your system. 
-
-## Getting the image
-
-### Building the image
-
-1. Assuming docker is installed properly, build image with 
- 
-        docker build  -t seqware_1.1.0-alpha.6_pancancer .
-
-### Downloading and restoring the image
-
-The current `<version>` of the image is 4.
-
-1. Rather than building the image, you can also download and restore it from S3 
-
-        aws s3 cp s3://oicr.docker.images/seqware_1.1.0-alpha.6_pancancer<version>.tar .
-        sudo docker load -i seqware_1.1.0-alpha.6_pancancer<version>.tar
-
-## Running the Container
-
+## Users - running the container
 
 1. Set permissions on datastore which will hold results of workflows after they run
 
          chmod a+w datastore
 
-2. Run the tabix server as a named container if you have not already (see the tabix container) 
+2. Run the tabix server as a named container if you have not already (see the [tabix](../tabix)) 
+
 
 3. Download and expand your workflows using the SeqWare unzip tool. Here we use Sanger as an example (you should probably pick a shared directory outside of this directory to avoid interfering with the Docker context if you need to rebuild the image). 
 
@@ -49,7 +16,7 @@ The current `<version>` of the image is 4.
 
 4. Run container and login with the following (while persisting workflow run directories to datastore, and opening a secure link to the tabix server). Here we assume that a tabix container has already started, that you want to store your workflow results at /datastore and that the workflow that you wish to run (Sanger) is present in the workflows directory. Change these locations as required for your environment.  
 
-         docker run --rm -h master -t --link pancancer_tabix_server:pancancer_tabix_server -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.5_SeqWare_1.1.0-alpha.5:/workflow  -i seqware_1.1.0-alpha.6_pancancer
+         docker run --rm -h master -t --link pancancer_tabix_server:pancancer_tabix_server -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_SangerPancancerCgpCnIndelSnvStr_1.0.5_SeqWare_1.1.0-alpha.5:/workflow  -i seqware/seqware_whitestar_pancancer 
 
 5. Create an ini file (the contents of this will depend on your workflow). For testing purposes, you will require the following ini, note that the ip address for the tabix server will appear in your environment variables as PANCANCER\_TABIX\_SERVER\_PORT\_80\_TCP\_ADDR 
 
@@ -68,13 +35,7 @@ The current `<version>` of the image is 4.
 
 7. For running real workflows, you will be provided with a gnos pem key that should be installed to the scripts directory of the Sanger workflow.
 
-## Saving the image
+## Developers - building the image locally  
 
-1. Save the image
-
-        exit
-        docker save -o seqware_1.1.0-alpha.6_pancancer<version>.tar seqware_1.1.0-alpha.6_pancancer
-
-2. Upload the image to S3 (given proper credentials)
-
-        aws s3 cp seqware_1.1.0-alpha.6_pancancer<version>.tar s3://oicr.docker.images
+1. Assuming docker is installed properly, build image with 
+ 
