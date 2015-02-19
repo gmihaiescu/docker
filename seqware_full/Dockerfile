@@ -24,8 +24,6 @@ ADD inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
 RUN git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
 ENV HOSTNAME master
-# is docker hub blocking ports
-EXPOSE 6444
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
 RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.0-alpha.6 docker=yes"
