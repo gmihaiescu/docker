@@ -18,3 +18,7 @@
 1. Assuming docker is installed properly, build image with 
 
         docker build  -t seqware/seqware_full .
+
+2. This image does not seem to be compatible with the Docker Hub automated build process either due to resource constraints or port blocking. 
+
+        docker push seqware/seqware_full
