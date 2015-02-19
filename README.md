@@ -24,6 +24,10 @@ Install Docker based on the instructions at https://docs.docker.com/installation
 
 After setting up, exit your shell and log back in to refresh your Shell.
 
+The steps for building and running these images assume that you are working within a checkout of this repo. Either:
+* Checkout this repo using git ` git clone https://github.com/SeqWare/docker.git && cd docker` and checkout the relevant version 
+* Download a tarball `wget https://github.com/SeqWare/docker/archive/1.0.tar.gz && tar -xvzf 1.0.tar.gz && cd docker-1.0/`
+
 ## Tabix 
 
 This container is used for serving up reference data for the [Sanger workflow](https://github.com/ICGC-TCGA-PanCancer/SeqWare-CGP-SomaticCore) for pancancer. 
