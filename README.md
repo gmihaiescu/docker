@@ -1,6 +1,6 @@
 # seqware-docker
 This collects the various docker distributions used by the SeqWare and Pancancer projects.
-Prerequisite containers can be resolved from Docker Hub which also runs continuous integration. 
+Prerequisite containers can be resolved from Docker Hub which also runs continuous integration (except for seqware\_full which does not work in the docker hub environment). 
 
 Install Docker based on the instructions at https://docs.docker.com/installation/ubuntulinux/ 
 When using Ubuntu, we recommend 14.04. Please also follow the section on giving non-root access to your preferred user.
