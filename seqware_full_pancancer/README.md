@@ -42,4 +42,4 @@
 
 1. Assuming docker is installed properly, build image with
 
-        docker build  -t seqware/pancancer_tabix_server .
+        docker build  -t seqware/seqware_full_pancancer .

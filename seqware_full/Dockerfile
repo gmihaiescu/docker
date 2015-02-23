@@ -20,7 +20,7 @@ ENV PYTHONPATH /tmp/ansible/lib:$PYTHON_PATH
 # setup seqware 
 WORKDIR /root 
 RUN git clone https://github.com/SeqWare/seqware-bag.git
-ADD inventory /etc/ansible/hosts
+COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
 RUN git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
 ENV HOSTNAME master
@@ -33,5 +33,6 @@ USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 RUN cd seqware-bag && git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
-ADD ./scripts/start.sh /start.sh
+COPY ./scripts/start.sh /start.sh
+RUN sudo chmod a+x /start.sh
 CMD ["/bin/bash", "/start.sh"]

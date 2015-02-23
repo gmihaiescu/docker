@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
 
 # kick off all services
 
@@ -7,4 +9,4 @@ sudo nohup cron -f &
 cd ~seqware
 source ~seqware/.bash_profile
 source ~seqware/.bashrc 
-/bin/bash
+sudo -E -u seqware -i ${1-bash} 
