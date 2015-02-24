@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 set -o pipefail
+set -o xtrace
 
 docker build --tag seqware/whitestar_dind --file=seqware_whitestar/Dockerfile .
 docker build --tag seqware/whitestar_pancancer_dind --file=seqware_whitestar_pancancer/Dockerfile .
