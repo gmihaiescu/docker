@@ -9,7 +9,7 @@ There are four images each corresponding to a base image from the root directory
 * seqware/full\_dind
 * seqware/full\_pancancer\_dind 
 
-Note that the notes omit the second seqware due to limits on the lengths of DockerHub repo names. 
+Note that the the second seqware is skipped for these images due to limits on the lengths of DockerHub repo names. The first time you run a container, the corresponding image will automatically be downloaded from DockerHub. 
 
 First, you're going to want a datastore directory and a workflow directory. 
 
