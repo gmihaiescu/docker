@@ -4,7 +4,7 @@
 FROM seqware/seqware_whitestar_pancancer
 
 
-# WARNING: DO NOT MODIFY BETWEEN THIS SECION AND THE NEXT ALL CAPS WARNING
+# WARNING: DO NOT MODIFY BETWEEN THIS SECTION AND THE NEXT ALL CAPS WARNING
 # This section is duplicated between the Dockerfiles in here pending include functionality
 
 MAINTAINER dyuen@oicr.on.ca
