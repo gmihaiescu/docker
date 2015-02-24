@@ -14,7 +14,7 @@ Note that the notes omit the second seqware due to limits on the lengths of Dock
 First, you're going to want a datastore directory and a workflow directory. 
 
         mkdir workflows && mkdir datastore
-        chmod a+x workflows && chmod a+x datastore
+        chmod a+wrx workflows && chmod a+wrx datastore
 
 In order to use these images you simply use the --privileged parameter when running the container in addition to whatever `docker run` instructions were present for the base container. Additionally, if you wish to use these containers programmatically rather than interactively you will need to invoke the wrapdocker script before your command. As an example, to list the workflows available in one of the images.
 
