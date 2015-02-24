@@ -34,7 +34,7 @@ Additionally, we provide an [example workflow](https://github.com/SeqWare/public
 
 Next, run the workflow in one of the above DIND containers. 
 
-        docker run --privileged --rm -h master -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_dockerHelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-rc.0:/workflow  -i seqware/full_pancancer_dind wrapdocker "seqware bundle launch --dir /workflow"
+        docker run --privileged --rm -h master -t -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_dockerHelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-rc.0:/workflow  -i seqware/full_pancancer_dind wrapdocker "seqware bundle launch --dir /workflow"
 
 This should start up the container, run the workflow, and then cleanup the container. You can then examine the results in the persistent datastore directory.
 
