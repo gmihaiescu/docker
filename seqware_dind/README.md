@@ -43,3 +43,6 @@ This should start up the container, run the workflow, and then cleanup the conta
 1. In order to build all four images
 
         chmod a+x build.sh && ./build.sh
+
+Note that when building, the build script will overwrite changes to wrapdocker to enforce that these are all the same. This is due to a Docker limitation on symlinks. 
+The same warning applies to the middle section of the Dockerfiles since Docker has not implemented include functionality yet.  
