@@ -4,10 +4,12 @@ This produces a wrapped image for each of the seqware containers with added dock
 
 There are four images each corresponding to a base image from the root directory. They are the following:
 
-* seqware/seqware\_whitestar\_dind 
-* seqware/seqware\_whitestar\_pancancer\_dind
-* seqware/seqware\_full\_dind
-* seqware/seqware\_full\_pancancer\_dind 
+* seqware/whitestar\_dind 
+* seqware/whitestar\_pancancer\_dind
+* seqware/full\_dind
+* seqware/full\_pancancer\_dind 
+
+Note that the notes omit the second seqware due to limits on the lengths of DockerHub repo names. 
 
 First, you're going to want a datastore directory and a workflow directory. 
 
