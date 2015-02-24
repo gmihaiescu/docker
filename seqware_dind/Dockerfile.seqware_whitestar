@@ -1,0 +1,38 @@
+# Based on https://github.com/jpetazzo/dind
+# This wraps a seqware container with dind functionality
+# We really need include functionality https://github.com/docker/docker/issues/735
+FROM seqware/seqware_whitestar
+
+
+# WARNING: DO NOT MODIFY BETWEEN THIS SECTION AND THE NEXT ALL CAPS WARNING
+# This section is duplicated between the Dockerfiles in here pending include functionality
+
+MAINTAINER dyuen@oicr.on.ca
+
+USER root 
+# Let's start with some basic stuff.
+RUN apt-get update -qq && apt-get install -qqy \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    lxc \
+    iptables
+    
+# Install Docker from Docker Inc. repositories.
+RUN curl -sSL https://get.docker.com/ubuntu/ | sh
+
+# Install the magic wrapper.
+COPY ./wrapdocker /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker
+
+# Define additional metadata for our image.
+VOLUME /var/lib/docker
+# Always log to a file
+ENV LOG file
+# Add non-root access to docker
+RUN sudo gpasswd -a seqware docker
+USER root
+
+# MODIFICATIONS BELOW 
+
+CMD ["wrapdocker","/bin/bash"]

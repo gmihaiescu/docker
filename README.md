@@ -24,7 +24,7 @@ Pre-requisite: SeqWare WhiteStar
 
 This layers in system level dependencies for the BWA and Sanger workflows for the pan-cancer project.
 
-Go to [seqware\_whitestar\_with_pancancer](seqware_whitestar_with_pancancer) for setup instructions
+Go to [seqware\_whitestar\_with\_pancancer](seqware_whitestar_with_pancancer) for setup instructions
 
 ### Documentation Builder 
 
@@ -46,5 +46,12 @@ Pre-requisite: SeqWare Full
 
 This layers in system level dependencies for the BWA and Sanger workflows for the pan-cancer project. 
 
-Go to [seqware\_full\_pancancer\_launcher](seqware_full_pancancer_launcher) for setup instructions
+Go to [seqware\_full\_pancancer](seqware_full_pancancer) for setup instructions
 
+### SeqWare Docker In Docker Wrapper
+
+Pre-requisite: The four preceding SeqWare containers. 
+
+This layers in Docker in Docker functionality based on [jpetazzo/dind](https://github.com/jpetazzo/dind)'s prototype. This creates a version of each of the above four containers while demoing a SeqWare workflow which uses docker containers to form the environment for steps in the workflow. 
+
+Go to [seqware\_dind](seqware_dind) for setup instructions. 

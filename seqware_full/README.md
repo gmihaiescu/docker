@@ -12,6 +12,10 @@
 3. Run the HelloWorld (sample) workflow with 
 
         seqware bundle launch --dir ~/provisioned-bundles/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.6/
+
+4. Alternatively, if you need to run a command on the container as a part of a script, you will need to invoke the start script first. As an example, to list the workflows available in the image.
+        
+        docker run --privileged --rm -h master -t -v `pwd`/datastore:/mnt/datastore -i seqware/seqware_full /start.sh "seqware workflow list" 
         
 ## Developers - building the image locally 
 
