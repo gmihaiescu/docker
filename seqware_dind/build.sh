@@ -2,7 +2,7 @@
 set -o errexit
 set -o pipefail
 
-docker build --tag seqware/seqware_whitestar_dind --file=Dockerfile.seqware_whitestar .
-docker build --tag seqware/seqware_whitestar_pancancer_dind --file=Dockerfile.seqware_whitestar_pancancer .
-docker build --tag seqware/seqware_full_dind --file=Dockerfile.seqware_full .
-docker build --tag seqware/seqware_full_pancancer_dind --file=Dockerfile.seqware_full_pancancer .
+docker build --tag seqware/whitestar_dind --file=seqware_whitestar/Dockerfile .
+docker build --tag seqware/whitestar_pancancer_dind --file=seqware_whitestar_pancancer/Dockerfile .
+docker build --tag seqware/full_dind --file=seqware_full/Dockerfile .
+docker build --tag seqware/full_pancancer_dind --file=seqware_full_pancancer/Dockerfile .
