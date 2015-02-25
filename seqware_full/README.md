@@ -15,7 +15,7 @@
 
 4. Alternatively, if you need to run a command on the container as a part of a script, you will need to invoke the start script first. As an example, to list the workflows available in the image.
         
-        docker run --privileged --rm -h master -t -v `pwd`/datastore:/mnt/datastore -i seqware/seqware_full /start.sh "seqware workflow list" 
+        docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore -i seqware/seqware_full /start.sh "seqware workflow list" 
 
 5. Note that you can also connect the Docker client inside this container to the Docker daemon on the host in order to run Docker containers as part of your workflows. In order to do this add `-v /var/run/docker.sock:/var/run/docker.sock` Additionally, we provide an [example workflow](https://github.com/SeqWare/public-workflows/tree/develop/dockerHelloWorld) that uses docker containers. This workflow has two steps, one that runs a toy command in a centos container and one which runs postgres. First, you need to download and expand the workflow. 
 
