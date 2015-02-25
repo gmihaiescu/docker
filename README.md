@@ -5,9 +5,9 @@ Prerequisite containers can be resolved from Docker Hub which also runs continuo
 Install Docker using the following script. This will automatically setup AUFS which is recommended for performance and DIND functionality. 
 
         curl -sSL https://get.docker.com/ | sudo sh
+        sudo usermod -aG docker ubuntu
 
 When using Ubuntu, we recommend 14.04. 
-Please also follow the section on giving non-root access to your preferred user (usually ubuntu).
 After setting up, remember to exit your shell and log back in to refresh your shell.
 
 ## Tabix 
@@ -51,11 +51,3 @@ Pre-requisite: SeqWare Full
 This layers in system level dependencies for the BWA and Sanger workflows for the pan-cancer project. 
 
 Go to [seqware\_full\_pancancer](seqware_full_pancancer) for setup instructions
-
-### SeqWare Docker In Docker Wrapper
-
-Pre-requisite: The four preceding SeqWare containers. 
-
-This layers in Docker in Docker functionality based on [jpetazzo/dind](https://github.com/jpetazzo/dind)'s prototype. This creates a version of each of the above four containers while demoing a SeqWare workflow which uses docker containers to form the environment for steps in the workflow. 
-
-Go to [seqware\_dind](seqware_dind) for setup instructions. 
