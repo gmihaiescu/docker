@@ -5,9 +5,9 @@ Prerequisite containers can be resolved from Docker Hub which also runs continuo
 Install Docker using the following script. This will automatically setup AUFS which is recommended for performance and DIND functionality. 
 
         curl -sSL https://get.docker.com/ | sudo sh
+        sudo usermod -aG docker ubuntu
 
 When using Ubuntu, we recommend 14.04. 
-Please also follow the section on giving non-root access to your preferred user (usually ubuntu).
 After setting up, remember to exit your shell and log back in to refresh your shell.
 
 ## Tabix 
