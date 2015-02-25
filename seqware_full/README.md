@@ -17,9 +17,7 @@
         
         docker run --privileged --rm -h master -t -v `pwd`/datastore:/mnt/datastore -i seqware/seqware_full /start.sh "seqware workflow list" 
 
-5. Note that you can also connect the Docker client inside this container to the Docker daemon on the host in order to run Docker containers as part of your workflows. In order to do this add `-v /var/run/docker.sock:/var/run/docker.sock`
-
-Additionally, we provide an [example workflow](https://github.com/SeqWare/public-workflows/tree/develop/dockerHelloWorld) that uses docker containers. This workflow has two steps, one that runs a toy command in a centos container and one which runs postgres. First, you need to download and expand the workflow. 
+5. Note that you can also connect the Docker client inside this container to the Docker daemon on the host in order to run Docker containers as part of your workflows. In order to do this add `-v /var/run/docker.sock:/var/run/docker.sock` Additionally, we provide an [example workflow](https://github.com/SeqWare/public-workflows/tree/develop/dockerHelloWorld) that uses docker containers. This workflow has two steps, one that runs a toy command in a centos container and one which runs postgres. First, you need to download and expand the workflow. 
 
         cd workflows
         wget https://seqwaremaven.oicr.on.ca/artifactory/seqware-release/com/github/seqware/seqware-distribution/1.1.0-alpha.6/seqware-distribution-1.1.0-alpha.6-full.jar
@@ -27,10 +25,9 @@ Additionally, we provide an [example workflow](https://github.com/SeqWare/public
         java -cp seqware-distribution-1.1.0-alpha.6-full.jar net.sourceforge.seqware.pipeline.tools.UnZip --input-zip Workflow_Bundle_dockerHelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-rc.0.zip --output-dir  Workflow_Bundle_dockerHelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-rc.0
         cd ..
 
-Next, run the workflow.
+5. Next, run the workflow.
 
         docker run --rm -h master -t -v /var/run/docker.sock:/var/run/docker.sock -v `pwd`/datastore:/datastore -v `pwd`/workflows/Workflow_Bundle_dockerHelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-rc.0:/workflow  -i seqware/seqware_full /start.sh "seqware bundle launch --dir /workflow"
-
 This should start up the container, run the workflow, and then cleanup the container. You can then examine the results in the persistent datastore directory.
         
         
