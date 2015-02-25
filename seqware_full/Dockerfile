@@ -32,7 +32,25 @@ ENV HOME /home/seqware
 USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
+# setup an ansible script to startup our required services when the container starts
 RUN cd seqware-bag && git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
+
+# setup docker in docker functionality assuming socket binding, inspired by https://github.com/jpetazzo/dind and https://github.com/docker/docker/issues/7285
+# example command: docker run --privileged  -h master --rm -t -i -v /var/run/docker.sock:/var/run/docker.sock seqware/seqware_whitestar
+
+USER root
+RUN apt-get update -qq && apt-get install -qqy \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    lxc \
+    iptables
+# Install Docker from Docker Inc. repositories.
+RUN curl -sSL https://get.docker.com/ | sh
+# Add non-root access to docker
+RUN sudo gpasswd -a seqware docker
+
+USER seqware
 CMD ["/bin/bash", "/start.sh"]
