@@ -2,13 +2,13 @@
 This collects the various docker distributions used by the SeqWare and Pancancer projects.
 Prerequisite containers can be resolved from Docker Hub which also runs continuous integration (except for seqware\_full which does not work in the docker hub environment). 
 
-Install Docker using the following script. This will automatically setup AUFS which is recommended for performance and DIND functionality. 
+Install Docker using the following script. This will automatically setup AUFS which is recommended for performance reasons. 
 
         curl -sSL https://get.docker.com/ | sudo sh
         sudo usermod -aG docker ubuntu
 
 When using Ubuntu, we recommend 14.04. 
-After setting up, remember to exit your shell and log back in to refresh your shell.
+After setting up, remember to exit your shell and log back in to refresh your environment.
 
 ## Tabix 
 
