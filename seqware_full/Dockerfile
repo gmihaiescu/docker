@@ -25,8 +25,8 @@ WORKDIR /root/seqware-bag
 RUN git checkout 6506dc22730fc3bda72595419df9856232fdc7a9
 ENV HOSTNAME master
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
-RUN cat /etc/hosts && echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
-RUN cat /tmp/tmpfile && cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.0-alpha.6 docker=yes"
+RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
+RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.0-alpha.6 docker=yes"
 # at this point, seqware has been fully setup
 ENV HOME /home/seqware
 USER seqware
