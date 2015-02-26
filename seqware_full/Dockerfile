@@ -22,7 +22,7 @@ WORKDIR /root
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
-RUN git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
+RUN git checkout d7d964f0821665a31ed237e65a5604af79d4c356
 ENV HOSTNAME master
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN cat /etc/hosts && echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
@@ -33,7 +33,7 @@ USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 # setup an ansible script to startup our required services when the container starts
-RUN cd seqware-bag && git checkout 807cbd968c39a1c151e6890ac2d47c9b872a5e21
+RUN cd seqware-bag && git checkout d7d964f0821665a31ed237e65a5604af79d4c356
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
 
