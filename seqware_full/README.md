@@ -17,7 +17,7 @@
         
         docker run --rm -h master -t -v `pwd`/datastore:/mnt/datastore -i seqware/seqware_full /start.sh "seqware workflow list" 
 
-5. Note that you can also connect the Docker client inside this container to the Docker daemon on the host in order to run Docker containers as part of your workflows. In order to do this add `-v /var/run/docker.sock:/var/run/docker.sock` Additionally, we provide an [example workflow](https://github.com/SeqWare/public-workflows/tree/develop/dockerHelloWorld) that uses docker containers. This workflow has two steps, one that runs a toy command in a centos container and one which runs postgres. First, you need to download and expand the workflow. 
+5. Note that you can also connect the Docker client inside this container to the Docker daemon on the host in order to run Docker containers as part of your workflows. In order to do this add `-v /var/run/docker.sock:/var/run/docker.sock` Additionally, we provide an [example workflow](https://github.com/SeqWare/public-workflows/tree/develop/dockerHelloWorld) that uses docker containers. This workflow has two steps, one that runs a toy command in a centos container and one which runs postgres. First, you need to download and expand the workflow. If you need to install Java `sudo apt-get install openjdk-7-jre-headless` is sufficient for this. 
 
         cd workflows
         wget https://seqwaremaven.oicr.on.ca/artifactory/seqware-release/com/github/seqware/seqware-distribution/1.1.0-alpha.6/seqware-distribution-1.1.0-alpha.6-full.jar
@@ -36,7 +36,3 @@ This should start up the container, run the workflow, and then cleanup the conta
 1. Assuming docker is installed properly, build image with 
 
         docker build  -t seqware/seqware_full .
-
-2. This image does not seem to be compatible with the Docker Hub automated build process either due to resource constraints or port blocking. 
-
-        docker push seqware/seqware_full

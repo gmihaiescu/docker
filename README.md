@@ -10,6 +10,8 @@ Install Docker using the following script. This will automatically setup AUFS wh
 When using Ubuntu, we recommend 14.04. 
 After setting up, remember to exit your shell and log back in to refresh your environment.
 
+Currently, most of these containers (including all of the SeqWare ones) are available and served as [automated builds](https://registry.hub.docker.com/repos/seqware/) on Docker Hub. We are also working on [quay.io](https://quay.io/repository/?namespace=seqware). 
+
 ## Tabix 
 
 This container is used for serving up reference data for the [Sanger workflow](https://github.com/ICGC-TCGA-PanCancer/SeqWare-CGP-SomaticCore) for pancancer. 
