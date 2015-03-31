@@ -12,6 +12,10 @@ After setting up, remember to exit your shell and log back in to refresh your en
 
 Currently, most of these containers (including all of the SeqWare ones) are available and served as [automated builds](https://registry.hub.docker.com/repos/seqware/) on Docker Hub. We are also working on [quay.io](https://quay.io/repository/?namespace=seqware). 
 
+## Java
+
+You will need Java 7 to extract the workflow .zip bundles.  Please install that version for your system.
+
 ## Tabix 
 
 This container is used for serving up reference data for the [Sanger workflow](https://github.com/ICGC-TCGA-PanCancer/SeqWare-CGP-SomaticCore) for pancancer. 
