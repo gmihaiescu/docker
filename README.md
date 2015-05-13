@@ -6,6 +6,7 @@ Install Docker using the following script. This will automatically setup AUFS wh
 
         curl -sSL https://get.docker.com/ | sudo sh
         sudo usermod -aG docker ubuntu
+        exit
 
 When using Ubuntu, we recommend 14.04. 
 After setting up, remember to exit your shell and log back in to refresh your environment.
